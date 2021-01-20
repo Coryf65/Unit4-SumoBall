@@ -10,7 +10,7 @@ namespace Cory.SumoBall
 
         private Rigidbody playerRb = null;
         private GameObject focalPoint = null;
-        private bool hasPowerup = false;
+        [SerializeField] private bool hasPowerup = false;
         private float powerupStrength = 20f;
 
         // Start is called before the first frame update
@@ -36,7 +36,15 @@ namespace Cory.SumoBall
             {
                 hasPowerup = true;
                 Destroy(other.gameObject);
+                StartCoroutine(PowerupCountdownRoutine());
             }
+        }
+
+        // using a countdown timer to expire the powerup
+        IEnumerator PowerupCountdownRoutine()
+        {
+            yield return new WaitForSeconds(7); // wait 7 seconds
+            hasPowerup = false;
         }
 
         private void OnCollisionEnter(Collision collision)
