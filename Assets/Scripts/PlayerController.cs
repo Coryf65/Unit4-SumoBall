@@ -7,10 +7,11 @@ namespace Cory.SumoBall
     public class PlayerController : MonoBehaviour
     {
         public float speed = 5f;
+        public GameObject powerupIndicator = null;
 
+        private bool hasPowerup = false;
         private Rigidbody playerRb = null;
         private GameObject focalPoint = null;
-        [SerializeField] private bool hasPowerup = false;
         private float powerupStrength = 20f;
 
         // Start is called before the first frame update
@@ -28,6 +29,8 @@ namespace Cory.SumoBall
 
             // move the player object
             playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
+
+            powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -35,6 +38,7 @@ namespace Cory.SumoBall
             if (other.CompareTag("Powerup"))
             {
                 hasPowerup = true;
+                powerupIndicator.gameObject.SetActive(true);
                 Destroy(other.gameObject);
                 StartCoroutine(PowerupCountdownRoutine());
             }
@@ -44,6 +48,7 @@ namespace Cory.SumoBall
         IEnumerator PowerupCountdownRoutine()
         {
             yield return new WaitForSeconds(7); // wait 7 seconds
+            powerupIndicator.gameObject.SetActive(false);
             hasPowerup = false;
         }
 
