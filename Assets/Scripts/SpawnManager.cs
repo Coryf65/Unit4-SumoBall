@@ -26,5 +26,6 @@ namespace Cory.SumoBall
             Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
         }
 
+
     }
 }
