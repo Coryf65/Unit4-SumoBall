@@ -11,6 +11,7 @@ namespace Cory.SumoBall
         private Rigidbody playerRb = null;
         private GameObject focalPoint = null;
         private bool hasPowerup = false;
+        private float powerupStrength = 20f;
 
         // Start is called before the first frame update
         void Start()
@@ -42,6 +43,13 @@ namespace Cory.SumoBall
         {
             if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
             {
+                // add double force!
+                Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+                Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
+
+                // apply push
+                enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
+
                 Debug.Log($"Collided with: {collision.gameObject.name} with powerup set to: {hasPowerup}");
             }
         }
