@@ -37,5 +37,13 @@ namespace Cory.SumoBall
                 Destroy(other.gameObject);
             }
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
+            {
+                Debug.Log($"Collided with: {collision.gameObject.name} with powerup set to: {hasPowerup}");
+            }
+        }
     }
 }
