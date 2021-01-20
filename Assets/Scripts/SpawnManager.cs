@@ -8,10 +8,17 @@ namespace Cory.SumoBall
     {
         public GameObject enemyPrefab = null;
 
+        private float spawnRange = 9.0f; // prevent spawning from outside the map
+
         // Start is called before the first frame update
         void Start()
         {
-            Instantiate(enemyPrefab, new Vector3(0, 0, 6), enemyPrefab.transform.rotation);
+            // spawn an enemy at a random point
+            float spawnPositionX = Random.Range(-spawnRange, spawnRange);
+            float spawnPositionZ = Random.Range(-spawnRange, spawnRange);
+            Vector3 randomPosition = new Vector3(spawnPositionX, 0, spawnPositionZ);
+
+            Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
         }
 
         // Update is called once per frame
