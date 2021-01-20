@@ -20,10 +20,10 @@ namespace Cory.SumoBall
         // Update is called once per frame
         void Update()
         {
+            Vector3 lookDirection = (player.transform.position - transform.position).normalized;
+
             // a - b = c, Enemies position - Our Position = the direction to go
-            enemyRb.AddForce((player.transform.position - transform.position).normalized * speed); 
-            // using .normalized it will level of the vector
-            // bug where the greater the distance the more power
+            enemyRb.AddForce(lookDirection * speed);
         }
     }
 }
