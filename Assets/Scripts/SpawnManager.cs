@@ -13,6 +13,11 @@ namespace Cory.SumoBall
         // Start is called before the first frame update
         void Start()
         {
+            SpawnEnemy();
+        }
+
+        private void SpawnEnemy()
+        {
             // spawn an enemy at a random point
             float spawnPositionX = Random.Range(-spawnRange, spawnRange);
             float spawnPositionZ = Random.Range(-spawnRange, spawnRange);
@@ -21,10 +26,5 @@ namespace Cory.SumoBall
             Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }
