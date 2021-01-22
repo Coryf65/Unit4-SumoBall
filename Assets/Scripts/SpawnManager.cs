@@ -13,7 +13,7 @@ namespace Cory.SumoBall
         // Start is called before the first frame update
         void Start()
         {
-            SpawnEnemy();
+            SpawnEnemyWave(3);
         }
 
         private void SpawnEnemy()
@@ -26,6 +26,13 @@ namespace Cory.SumoBall
             Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
         }
 
+        void SpawnEnemyWave(int enemiesToSpawn)
+        {
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                SpawnEnemy();
+            }
+        }
 
     }
 }
