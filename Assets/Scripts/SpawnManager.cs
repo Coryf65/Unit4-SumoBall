@@ -7,6 +7,7 @@ namespace Cory.SumoBall
     public class SpawnManager : MonoBehaviour
     {
         public GameObject enemyPrefab = null;
+        public int enemyCount { get; private set; }
 
         private float spawnRange = 9.0f; // prevent spawning from outside the map
 
@@ -14,6 +15,16 @@ namespace Cory.SumoBall
         void Start()
         {
             SpawnEnemyWave(3);
+        }
+
+        private void Update()
+        {
+            enemyCount = FindObjectsOfType<Enemy>().Length;
+
+            if (enemyCount == 0)
+            {
+                SpawnEnemyWave(1);
+            }
         }
 
         private void SpawnEnemy()
