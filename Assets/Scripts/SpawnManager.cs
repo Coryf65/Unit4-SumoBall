@@ -8,13 +8,14 @@ namespace Cory.SumoBall
     {
         public GameObject enemyPrefab = null;
         public int enemyCount { get; private set; }
+        public int waveNumber = 1;
 
         private float spawnRange = 9.0f; // prevent spawning from outside the map
 
         // Start is called before the first frame update
         void Start()
         {
-            SpawnEnemyWave(3);
+            SpawnEnemyWave(waveNumber);
         }
 
         private void Update()
@@ -23,7 +24,8 @@ namespace Cory.SumoBall
 
             if (enemyCount == 0)
             {
-                SpawnEnemyWave(1);
+                waveNumber++; // next wave
+                SpawnEnemyWave(waveNumber);
             }
         }
 
