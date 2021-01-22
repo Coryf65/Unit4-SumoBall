@@ -7,6 +7,7 @@ namespace Cory.SumoBall
     public class SpawnManager : MonoBehaviour
     {
         public GameObject enemyPrefab = null;
+        public GameObject powerupPrefab = null;
         public int enemyCount { get; private set; }
         public int waveNumber = 1;
 
@@ -26,24 +27,23 @@ namespace Cory.SumoBall
             {
                 waveNumber++; // next wave
                 SpawnEnemyWave(waveNumber);
+                Instantiate(powerupPrefab, RandomPosition(), powerupPrefab.transform.rotation);
             }
         }
 
-        private void SpawnEnemy()
+        private Vector3 RandomPosition()
         {
             // spawn an enemy at a random point
             float spawnPositionX = Random.Range(-spawnRange, spawnRange);
             float spawnPositionZ = Random.Range(-spawnRange, spawnRange);
-            Vector3 randomPosition = new Vector3(spawnPositionX, 0, spawnPositionZ);
-
-            Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
+            return new Vector3(spawnPositionX, 0, spawnPositionZ);            
         }
 
         void SpawnEnemyWave(int enemiesToSpawn)
         {
             for (int i = 0; i < enemiesToSpawn; i++)
             {
-                SpawnEnemy();
+                Instantiate(enemyPrefab, RandomPosition(), enemyPrefab.transform.rotation);
             }
         }
 
