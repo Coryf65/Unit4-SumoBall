@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,6 +50,12 @@ public class PlayerControllerX : MonoBehaviour
         yield return new WaitForSeconds(powerUpDuration);
         hasPowerup = false;
         powerupIndicator.SetActive(false);
+        StartCoroutine(PowerupCountdownRoutine());
+    }
+
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7); // wait 7 seconds
     }
 
     // If Player collides with enemy
