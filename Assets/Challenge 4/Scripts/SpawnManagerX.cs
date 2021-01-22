@@ -14,7 +14,6 @@ public class SpawnManagerX : MonoBehaviour
     public int enemyCount;
     public int waveCount = 1;
 
-
     public GameObject player; 
 
     // Update is called once per frame
@@ -25,6 +24,7 @@ public class SpawnManagerX : MonoBehaviour
         if (enemyCount == 0)
         {
             SpawnEnemyWave(waveCount);
+            enemyPrefab.GetComponent<EnemyX>().speed *= 1.2f;
         }
 
     }
