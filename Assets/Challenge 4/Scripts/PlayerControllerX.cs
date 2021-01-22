@@ -8,6 +8,7 @@ public class PlayerControllerX : MonoBehaviour
     private Rigidbody playerRb;
     private float speed = 500;
     private GameObject focalPoint;
+    private ParticleSystem dustParticle = null;
 
     public bool hasPowerup;
     public GameObject powerupIndicator;
@@ -20,6 +21,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
+        dustParticle = GameObject.Find("Smoke_Particle").GetComponent<ParticleSystem>();
     }
 
     void Update()
@@ -30,6 +32,12 @@ public class PlayerControllerX : MonoBehaviour
 
         // Set powerup indicator position to beneath player
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.6f, 0);
+
+        if (Input.GetKeyDown("space"))
+        {
+            dustParticle.Play();
+            playerRb.AddForce(focalPoint.transform.forward * 10, ForceMode.Impulse);
+        }
 
     }
 
